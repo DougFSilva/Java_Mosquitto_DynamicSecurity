@@ -19,15 +19,6 @@ public class DynSecRole {
 		this.rolename = "role_" + rolename;
 	}
 	
-	/**
-	 * Construtor que adiciona uma "baseName" seguido de um underline definida pelo usuário antes da rolename
-	 * @param rolename - nome da role a ser criada.
-	 * @param baseName - String seguido de um underline a ser adicionado antes do rolename
-	 */
-	public DynSecRole(String rolename, String baseName) {
-		this.rolename = baseName + "_" + rolename;
-	}
-
 	public String getRolename() {
 		return rolename;
 	}

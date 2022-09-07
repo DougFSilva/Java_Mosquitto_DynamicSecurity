@@ -16,21 +16,21 @@ public class RoleCommand {
 		this.role = role;
 	}
 
-	public JsonObject getCreateCommand() {
+	public JsonObject createCommand() {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.CREATE_ROLE.getDescription());
 		command.addProperty("rolename", role.getRolename());
 		return command;
 	}
 
-	public JsonObject getDeleteCommand() {
+	public JsonObject deleteCommand() {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.DELETE_ROLE.getDescription());
 		command.addProperty("rolename", role.getRolename());
 		return command;
 	}
 
-	public JsonObject getAddRoleACLCommand(DynSecACL ACL) {
+	public JsonObject addRoleACLCommand(DynSecACL ACL) {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.ADD_ROLE_ACL.getDescription());
 		command.addProperty("rolename", role.getRolename());
@@ -39,8 +39,19 @@ public class RoleCommand {
 		command.addProperty("allow", ACL.isAllow());
 		return command;
 	}
+	
+	public JsonObject addRoleACLWithPriorityCommand(DynSecACL ACL, Integer priority) {
+		JsonObject command = new JsonObject();
+		command.addProperty("command", DynSecCommandType.ADD_ROLE_ACL.getDescription());
+		command.addProperty("rolename", role.getRolename());
+		command.addProperty("acltype", ACL.getAclType().getDescription());
+		command.addProperty("topic", ACL.getTopic());
+		command.addProperty("allow", ACL.isAllow());
+		command.addProperty("priority", priority);
+		return command;
+	}
 
-	public JsonObject getRemoveRoleACLCommand(DynSecACL ACL) {
+	public JsonObject removeRoleACLCommand(DynSecACL ACL) {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.ADD_ROLE_ACL.getDescription());
 		command.addProperty("rolename", role.getRolename());
@@ -56,7 +67,7 @@ public class RoleCommand {
 		return command;
 	}
 
-	public JsonObject GetListRolesCommand() {
+	public JsonObject listRolesCommand() {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.LIST_ROLE.getDescription());
 		return command;

@@ -16,7 +16,7 @@ public class ClientCommand {
 		this.client = client;
 	}
 
-	public JsonObject getCreateCommand() {
+	public JsonObject createCommand() {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.CREATE_CLIENT.getDescription());
 		command.addProperty("username", client.getUsername());
@@ -24,7 +24,7 @@ public class ClientCommand {
 		return command;
 	}
 
-	public JsonObject getCreateWithIdCommand() {
+	public JsonObject createWithIdCommand() {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.CREATE_CLIENT.getDescription());
 		command.addProperty("username", client.getUsername());
@@ -32,7 +32,7 @@ public class ClientCommand {
 		return command;
 	}
 
-	public JsonObject getAddRoleCommand(DynSecRole role) {
+	public JsonObject addRoleCommand(DynSecRole role) {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.ADD_CLIENT_ROLE.getDescription());
 		command.addProperty("username", client.getUsername());
@@ -40,7 +40,7 @@ public class ClientCommand {
 		return command;
 	}
 
-	public JsonObject getAddRoleWithPriorityCommand(DynSecRole role, Integer priority) {
+	public JsonObject addRoleWithPriorityCommand(DynSecRole role, Integer priority) {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.ADD_CLIENT_ROLE.getDescription());
 		command.addProperty("username", client.getUsername());
@@ -49,7 +49,7 @@ public class ClientCommand {
 		return command;
 	}
 
-	public JsonObject getRemoveRoleCommand(DynSecRole role) {
+	public JsonObject removeRoleCommand(DynSecRole role) {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.REMOVE_CLIENT_ROLE.getDescription());
 		command.addProperty("username", client.getUsername());
@@ -57,21 +57,21 @@ public class ClientCommand {
 		return command;
 	}
 
-	public JsonObject getDeleteCommand() {
+	public JsonObject deleteCommand() {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.DELETE_CLIENT.getDescription());
 		command.addProperty("username", client.getUsername());
 		return command;
 	}
 
-	public JsonObject getDisableCommand() {
+	public JsonObject disableCommand() {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.DISABLE_CLIENT.getDescription());
 		command.addProperty("username", client.getUsername());
 		return command;
 	}
 
-	public JsonObject getEnableCommand() {
+	public JsonObject enableCommand() {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.DISABLE_CLIENT.getDescription());
 		command.addProperty("username", client.getUsername());
@@ -85,7 +85,7 @@ public class ClientCommand {
 		return command;
 	}
 
-	public JsonObject getListClientsCommand() {
+	public JsonObject listClientsCommand() {
 		JsonObject command = new JsonObject();
 		command.addProperty("command", DynSecCommandType.LIST_CLIENT.getDescription());
 		return command;
