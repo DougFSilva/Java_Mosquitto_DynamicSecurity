@@ -1,7 +1,7 @@
 package br.com.MosquittoDynamicSecurity.dynsec.role;
 
 /**
- * A classe <b>DynSecRole</b> define uma Role Mosquitto. As roles são atribuidas a um client ou group. 
+ * A classe <b>DynSecRole</b> define uma role Mosquitto. As roles são atribuidas a um client ou group. 
  * @author Douglas Ferreira da Silva
  * @since Set 2022
  * @version 1.0

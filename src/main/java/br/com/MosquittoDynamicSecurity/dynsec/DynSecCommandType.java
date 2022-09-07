@@ -32,16 +32,11 @@ public enum DynSecCommandType {
 	ADD_GROUP_CLIENT("addGroupClient"),
 	REMOVE_GROUP_CLIENT("removeGroupClient"),
 	ADD_GROUP_ROLE("addGroupRole"),
-	REMOVE_GROUP_ROLE("addGroupRole"),
+	REMOVE_GROUP_ROLE("removeGroupRole"),
 	SET_ANONYMOUS_GROUP("setAnonymousGroup"),
 	GET_ANONYMOUS_GROUP("getAnonymousGroup"),
 	GET_GROUP("getGroup"),
-	LIST_GROUP("listGroups"),
-	
-	// Default ACL
-	SET_DEFAULT_ACL_ACCESS("listGroups"),
-	GET_DEFAULT_ACL_ACCESS("listGroups");
-	
+	LIST_GROUP("listGroups");
 	
 	private String description;
 

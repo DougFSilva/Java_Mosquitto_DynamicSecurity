@@ -76,7 +76,7 @@ public class DynSecPublisher implements MqttCallback {
 	/**
 	 * Método para adicionar comandos a serem executados pelo método
 	 * <i>publish()</i>
-	 * @param dynSecCommand
+	 * @param command Objeto do tipo JsonObject contendo os comandos a serem publicados
 	 * @return Retorna a própria classe permitindo o encadeamento de métodos
 	 */
 	public DynSecPublisher addCommand(JsonObject command) {
