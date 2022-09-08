@@ -76,7 +76,9 @@ public class DynSecPublisher implements MqttCallback {
 	/**
 	 * Método para adicionar comandos a serem executados pelo método
 	 * <i>publish()</i>
-	 * @param command Objeto do tipo JsonObject contendo os comandos a serem publicados
+	 * 
+	 * @param command Objeto do tipo JsonObject contendo os comandos a serem
+	 *                publicados
 	 * @return Retorna a própria classe permitindo o encadeamento de métodos
 	 */
 	public DynSecPublisher addCommand(JsonObject command) {
@@ -87,10 +89,13 @@ public class DynSecPublisher implements MqttCallback {
 	/**
 	 * Método para limpar a lista de comandos a serem executados pelo método
 	 * <i>publish()</i>
+	 * 
 	 * @return Retorna a própria classe permitindo o encadeamento de métodos
 	 */
 	public DynSecPublisher removeCommands() {
-		this.commands.forEach(command -> this.commands.remove(command));
+		for (int i = 0; i < this.commands.size(); i++) {
+			this.commands.remove(i);
+		}
 		return this;
 	}
 
@@ -117,6 +122,7 @@ public class DynSecPublisher implements MqttCallback {
 			client.publish(topicToPublish, message);
 			client.unsubscribe(topicToSubscribe);
 			client.disconnect();
+			removeCommands();
 		} catch (MqttException e) {
 			throw new RuntimeException(e.getMessage(), e.getCause());
 		}

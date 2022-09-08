@@ -20,24 +20,25 @@ Para Linux/BSD:
 ```
 allow_anonymous false
 per_listener_settings false
-plugin path/mosquitto_dynamic_security.so
-plugin_opt_config_file path/dynamic-security.json
+plugin <path>/mosquitto_dynamic_security.so
+plugin_opt_config_file <path>/dynamic-security.json
 ``` 
 Para Windows:
 ```
 allow_anonymous false
 per_listener_settings false
-plugin path\mosquitto_dynamic_security.dll
-plugin_opt_config_file path\dynamic-security.json
+plugin <path>\mosquitto_dynamic_security.dll
+plugin_opt_config_file <path>\dynamic-security.json
 ```
 
-**Obs.:** path é o caminho da pasta de instalação do Mosquitto. Por exemplo, se o Mosquitto foi instalado em Documents em um Windows o comando seria:
+<span style="color:orange">**Obs.:** path é o caminho da pasta de instalação do Mosquitto. Por exemplo, se o Mosquitto foi instalado em Documents em um Windows o comando seria:</span>
 
-_plugin_opt_config_file c:\Users\fulano\Documents\mosquitto\dynamic-security.json_
+<span style="color:orange">_plugin_opt_config_file c:\Users\fulano\Documents\mosquitto\dynamic-security.json_ </span>
+
 ### 2. Criar o arquivo dynamic-security.json na pasta de instalação do Mosquitto
 Abrir o terminal, navegar até a pasta de instalação do Mosquitto e executar o comando:
 ```
-mosquitto_ctrl dynsec init path\dynamic-security.json <admin-user>
+mosquitto_ctrl dynsec init <path>\dynamic-security.json <admin-user>
 ```
 **_admin-user_** é o nome do usuário admin desejado. Será solicitado que seja digitado a senha desejada para o usuário
 
@@ -45,7 +46,7 @@ mosquitto_ctrl dynsec init path\dynamic-security.json <admin-user>
 Com o terminal aberto na pasta de instalação do mosquitto execute o seguinte comando:
 
 ```
-mosquitto -c path\mosquitto.conf -v
+mosquitto -c <path>\mosquitto.conf -v
 ```
 
 ### 4. Configurar o acesso padrão
@@ -70,6 +71,42 @@ onde:
 **_password_** - Password do usuário admin criado no passo 2
 **_hostname_** - Hostname no Mosquitto (por exemplo localhost)
 **_port_** - porta (a porta padrão do Mosquitto é 1883)
+
+
+### 5. Baixar o jar e inserir no classPath
+
+Baixar o arquivo MosquittoDynSec.jar da pasta jar e inserir no classPath do projeto desejado
+
+## Utilização
+
+### Criando um client
+
+```
+
+	DynSecClient client = new DynSecClient("Client0", "PasswordClient0");
+	ClientCommand clientCommand = new ClientCommand(client);
+	DynSecPublisher publisher = new DynSecPublisher();
+	publisher.addCommand(clientCommand.createCommand()).publish();
+
+}
+```
+
+### Criando uma role
+
+```
+    DynSecRole role = new DynSecRole("role0");
+	RoleCommand roleCommand = new RoleCommand(role);
+	DynSecPublisher publisher = new DynSecPublisher();
+	publisher.addCommand(roleCommand.createCommand()).publish();
+```
+
+### Adicionando uma ACL a role criada no passo anterior
+
+```
+    DynSecACL acl = new DynSecACL(ACLType.PUBLISH_CLIENT_RECEIVE, "tópico0", true);
+	DynSecPublisher publisher = new DynSecPublisher();
+	publisher.addCommand(roleCommand.addRoleACLCommand(acl)).publish();
+```
 
 ## 🛠️Construído com
 
