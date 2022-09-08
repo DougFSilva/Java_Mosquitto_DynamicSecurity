@@ -148,6 +148,8 @@ DynSecPublisher publisher = new DynSecPublisher();
 
 ```
 
+Para os demais comandos possíveis e informações, veja em [Java-Mosquitto-DynamicSecurity-javadoc](https://dougfsilva.github.io/Java_Mosquitto_DynamicSecurity/)
+
 ## 🛠️Construído com
 
 ## ✒️ Autor
