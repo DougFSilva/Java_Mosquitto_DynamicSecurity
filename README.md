@@ -2,14 +2,16 @@
 Este código tem a finalidade de realizar a configuração de segurança dinâmica do Broker Mosquitto. Utilizando a segurança dinâmica é possível criar usuários, grupos, permissões sem a necessidade de reiniciar o Broker.
 Para mais informações sobre o funcionamento da segurança dinâmica do mosquitto acesse [Mosquitto Documentation](https://mosquitto.org/documentation/dynamic-security/)
 
+---
 ## 📋 Pré-requisitos
 Do que você precisa para utilizar o projeto
 
 Instalar o Mosquitto: 
 [Link para download](https://mosquitto.org/download/) 
 
-## 🚀 Começando    
-Estas instruções permitirão que você utilize o projeto e configure a segurança do seu Broker Mosquitto
+---
+## 🚀 Começando
+Estas instruções permitirão que você utilize o projeto e configure a segurança do seu Broker Mosquitto.
 
 ### 1. Editar o arquivo mosquitto.conf
 Este arquivo se encontra na pasta de instalação do Mosquitto.
@@ -35,6 +37,7 @@ plugin_opt_config_file <path>\dynamic-security.json
 
 <span style="color:orange">_plugin_opt_config_file c:\Users\fulano\Documents\mosquitto\dynamic-security.json_ </span>
 
+---
 ### 2. Criar o arquivo dynamic-security.json na pasta de instalação do Mosquitto
 Abrir o terminal, navegar até a pasta de instalação do Mosquitto e executar o comando:
 ```
@@ -42,18 +45,19 @@ mosquitto_ctrl dynsec init <path>\dynamic-security.json <admin-user>
 ```
 **_admin-user_** é o nome do usuário admin desejado. Será solicitado que seja digitado a senha desejada para o usuário
 
+---
 ### 3. Iniciar o Mosquitto
 Com o terminal aberto na pasta de instalação do mosquitto execute o seguinte comando:
 
 ```
 mosquitto -c <path>\mosquitto.conf -v
 ```
-
+---
 ### 4. Configurar o acesso padrão
 Com o Mosquitto rodando, configurar o acesso padrão para que todo client criado posteriormente já inicie com as permissões bloqueadas. Para isso serão necessários os seguintes comandos (lembrar de estar com o terminal aberto na pasta de instalação do Mosquitto)
 
 ```
-mosquitto_ctrl -u <usuário> -P <password> -h <hostname> -p <port> </port>dynsec setDefaultACLAccess publishClientSend deny
+mosquitto_ctrl -u <usuário> -P <password> -h <hostname> -p <port> dynsec setDefaultACLAccess publishClientSend deny
 ```
 ```
 mosquitto_ctrl -u <usuário> -P <password> -h <hostname> -p <port>  dynsec setDefaultACLAccess publishClientReceive deny 
@@ -62,7 +66,7 @@ mosquitto_ctrl -u <usuário> -P <password> -h <hostname> -p <port>  dynsec setDe
 mosquitto_ctrl -u <usuário> -P <password> -h <hostname> -p <port>  dynsec setDefaultACLAccess subscribe deny 
 ```
 ```
-mosquitto_ctrl -u <usuário> -P <password> -h <hostname> -p <port>  dynsec setDefaultACLAccess cancelar inscrição negar
+mosquitto_ctrl -u <usuário> -P <password> -h <hostname> -p <port>  dynsec setDefaultACLAccess unsubscribe deny
 ```
 
 onde:
@@ -72,7 +76,7 @@ onde:
 **_hostname_** - Hostname no Mosquitto (por exemplo localhost)
 **_port_** - porta (a porta padrão do Mosquitto é 1883)
 
-
+---
 ### 5. Baixar o jar e inserir no classPath
 
 Baixar o arquivo MosquittoDynSec.jar da pasta jar e inserir no classPath do projeto desejado
@@ -133,25 +137,29 @@ Baixar o arquivo MosquittoDynSec.jar da pasta jar e inserir no classPath do proj
 ### Também é possível criar grupos, adicionar uma role a um grupo e incluir clients nesse grupo. Veja o exemplo a seguir:
 
 ```
-DynSecPublisher publisher = new DynSecPublisher();
-		DynSecGroup group = new DynSecGroup("group10");
-		DynSecRole role = new DynSecRole("role10");
-		DynSecClient client = new DynSecClient("client10", "passwordClient10");
-		DynSecACL acl = new DynSecACL(ACLType.PUBLISH_CLIENT_RECEIVE, "tópico10", true);
-		publisher.addCommand(group.createCommand())
-				 .addCommand(role.createCommand())
-				 .addCommand(client.createCommand())
-				 .addCommand(role.addRoleACLCommand(acl))
-				 .addCommand(group.addRoleCommand(role)) 
-				 .addCommand(group.addClientCommand(client))
-				 .publish(); // publica
+    DynSecPublisher publisher = new DynSecPublisher();
+	DynSecGroup group = new DynSecGroup("group10");
+	DynSecRole role = new DynSecRole("role10");
+	DynSecClient client = new DynSecClient("client10", "passwordClient10");
+	DynSecACL acl = new DynSecACL(ACLType.PUBLISH_CLIENT_RECEIVE, "tópico10", true);
+	publisher.addCommand(group.createCommand())
+			 .addCommand(role.createCommand())
+			 .addCommand(client.createCommand())
+			 .addCommand(role.addRoleACLCommand(acl))
+			 .addCommand(group.addRoleCommand(role)) 
+			 .addCommand(group.addClientCommand(client))
+			 .publish(); // publica
 
 ```
 
 Para os demais comandos possíveis e informações, veja em [Java-Mosquitto-DynamicSecurity-javadoc](https://dougfsilva.github.io/Java_Mosquitto_DynamicSecurity/)
 
+---
 ## 🛠️Construído com
 
+* Spring boot
+* Dependências: org.eclipse.paho e com.google.gson
+---
 ## ✒️ Autor
 * Douglas Ferreira da Silva
 
