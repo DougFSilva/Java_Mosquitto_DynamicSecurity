@@ -86,69 +86,69 @@ Baixar o arquivo MosquittoDynSec.jar da pasta jar e inserir no classPath do proj
 ### Criando um publisher
 
 ```
-    DynSecPublisher publisher = new DynSecPublisher();
+DynSecPublisher publisher = new DynSecPublisher();
 ```
 
 ### Criando um client
 
 ```
-	DynSecClient client = new DynSecClient("client10", "passwordClient10");
-	publisher.addCommand(client.createCommand())
-			 .publish();
+DynSecClient client = new DynSecClient("client10", "passwordClient10");
+publisher.addCommand(client.createCommand())
+		 .publish();
 ```
 
 ### Criando uma role
 
 ```
-	DynSecRole role = new DynSecRole("role0");
-	publisher.addCommand(role.createCommand())
-			 .publish();
+DynSecRole role = new DynSecRole("role0");
+publisher.addCommand(role.createCommand())
+		 .publish();
 ```
 
 ### Adicionando uma ACL a role criada no passo anterior
 
 ```
-    DynSecACL acl = new DynSecACL(ACLType.PUBLISH_CLIENT_RECEIVE, "tópico0", true);
-	publisher.addCommand(role.addRoleACLCommand(acl))
-			 .publish();
+DynSecACL acl = new DynSecACL(ACLType.PUBLISH_CLIENT_RECEIVE, "tópico0", true);
+publisher.addCommand(role.addRoleACLCommand(acl))
+		 .publish();
 ```
 
 ### Adicionando a role ao client
 
 ```
-    publisher.addCommand(client.addRoleCommand(role))
+publisher.addCommand(client.addRoleCommand(role))
 		 .publish();
 ```
 
 ### De uma forma mais enxuta o código inteiro ficaria:
 
 ```
-	DynSecPublisher publisher = new DynSecPublisher();
-	DynSecClient client = new DynSecClient("client10", "passwordClient10");
-	DynSecRole role = new DynSecRole("role0");
-	DynSecACL acl = new DynSecACL(ACLType.PUBLISH_CLIENT_RECEIVE, "tópico0", true);
-	publisher.addCommand(client.createCommand())
-			 .addCommand(role.createCommand())
-			 .addCommand(role.addRoleACLCommand(acl))
-			 .addCommand(client.addRoleCommand(role))
-			 .publish();
+DynSecPublisher publisher = new DynSecPublisher();
+DynSecClient client = new DynSecClient("client10", "passwordClient10");
+DynSecRole role = new DynSecRole("role0");
+DynSecACL acl = new DynSecACL(ACLType.PUBLISH_CLIENT_RECEIVE, "tópico0", true);
+publisher.addCommand(client.createCommand())
+		 .addCommand(role.createCommand())
+		 .addCommand(role.addRoleACLCommand(acl))
+		 .addCommand(client.addRoleCommand(role))
+		 .publish();
 ```
 
 ### Também é possível criar grupos, adicionar uma role a um grupo e incluir clients nesse grupo. Veja o exemplo a seguir:
 
 ```
-    DynSecPublisher publisher = new DynSecPublisher();
-	DynSecGroup group = new DynSecGroup("group10");
-	DynSecRole role = new DynSecRole("role10");
-	DynSecClient client = new DynSecClient("client10", "passwordClient10");
-	DynSecACL acl = new DynSecACL(ACLType.PUBLISH_CLIENT_RECEIVE, "tópico10", true);
-	publisher.addCommand(group.createCommand())
-			 .addCommand(role.createCommand())
-			 .addCommand(client.createCommand())
-			 .addCommand(role.addRoleACLCommand(acl))
-			 .addCommand(group.addRoleCommand(role)) 
-			 .addCommand(group.addClientCommand(client))
-			 .publish(); // publica
+DynSecPublisher publisher = new DynSecPublisher();
+DynSecGroup group = new DynSecGroup("group10");
+DynSecRole role = new DynSecRole("role10");
+DynSecClient client = new DynSecClient("client10", "passwordClient10");
+DynSecACL acl = new DynSecACL(ACLType.PUBLISH_CLIENT_RECEIVE, "tópico10", true);
+publisher.addCommand(group.createCommand())
+		 .addCommand(role.createCommand())
+		 .addCommand(client.createCommand())
+		 .addCommand(role.addRoleACLCommand(acl))
+		 .addCommand(group.addRoleCommand(role)) 
+		 .addCommand(group.addClientCommand(client))
+		 .publish(); // publica
 
 ```
 
