@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dougFSilva</groupId>
-	<artifactId>br.com.MosquittoDynamicSecurity</artifactId>
+	<artifactId>MosquittoDynamicSecurity</artifactId>
 	<version>0.1</version>
 	<name>br.com.MosquittoDynamicSecurity</name>
 	<description>Segurança dinâmica do Mosquitto em java</description>
@@ -22,7 +22,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>

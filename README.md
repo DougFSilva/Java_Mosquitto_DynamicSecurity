@@ -77,16 +77,39 @@ onde:
 **_port_** - porta (a porta padrão do Mosquitto é 1883)
 
 ---
-### 5. Baixar o jar e inserir no classPath
+### 5. Baixar o jar e adicionar no projeto desejado
 
-Baixar o arquivo MosquittoDynSec.jar da pasta jar e inserir no classPath do projeto desejado
+Baixar o arquivo MosquittoDynSec.jar da pasta jar. Inserir no classPath do projeto desejado.
+
+**Para projetos com maven**
+
+Inserir no repositório local do maven com o seguinte comando:
+
+```
+mvn install:install-file -Dfile=<path da pasta onde foi baixado o arquivo>/MosquittoDynSec.jar -DgroupId=com.dougFSilva -DartifactId=mosquittoDynSec -Dversion=1.0.0 -Dpackaging=jar -DgeneratePom=true
+
+```
+
+Então adicionar no pom.xml da seguinte forma:
+
+```
+<dependency>
+	<groupId>com.dougFSilva</groupId>
+	<artifactId>mosquittoDynSec</artifactId>
+	<version>1.0.0</version>
+</dependency>
+```
 
 ## Utilização
 
 ### Criando um publisher
 
 ```
-DynSecPublisher publisher = new DynSecPublisher();
+String uri = "tcp://localhost:1883";
+String username = "admin";
+String password = "admin123";
+String clientId = "";
+DynSecPublisher publisher = new DynSecPublisher(uri, username, password, clientId);
 ```
 
 ### Criando um client

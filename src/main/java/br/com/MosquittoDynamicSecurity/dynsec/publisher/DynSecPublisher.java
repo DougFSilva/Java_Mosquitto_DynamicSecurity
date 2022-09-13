@@ -1,9 +1,5 @@
 package br.com.MosquittoDynamicSecurity.dynsec.publisher;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
-
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -51,24 +47,12 @@ public class DynSecPublisher implements MqttCallback {
 
 	private JsonArray commands;
 
-	/**
-	 * Construtor que faz a leitura das propriedades contidas no arquivo
-	 * <b>application.properties</b> e insere nos atributos da classe
-	 */
-	public DynSecPublisher() {
-		Properties properties = new Properties();
-		FileInputStream file;
-		try {
-			file = new FileInputStream("src/main/resources/application.properties");
-			properties.load(file);
-		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage(), e.getCause());
-		}
-		uri = properties.getProperty("mqtt.uri");
-		username = properties.getProperty("mqtt.admin.username");
-		password = properties.getProperty("mqtt.admin.password");
-		clientId = properties.getProperty("mqtt.admin.clientId");
-		topicToPublish = "$CONTROL/dynamic-security/v1";
+	public DynSecPublisher(String uri, String username, String password, String clientId) {
+		this.uri = uri;
+		this.username = username;
+		this.password = password;
+		this.clientId = clientId;
+		this.topicToPublish = "$CONTROL/dynamic-security/v1";
 		topicToSubscribe = "$CONTROL/dynamic-security/v1/#";
 		this.commands = new JsonArray();
 	}
