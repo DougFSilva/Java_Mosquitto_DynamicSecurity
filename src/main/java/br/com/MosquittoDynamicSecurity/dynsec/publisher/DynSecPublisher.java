@@ -47,6 +47,13 @@ public class DynSecPublisher implements MqttCallback {
 
 	private JsonArray commands;
 
+	/**
+	 * 
+	 * @param uri
+	 * @param username
+	 * @param password
+	 * @param clientId
+	 */
 	public DynSecPublisher(String uri, String username, String password, String clientId) {
 		this.uri = uri;
 		this.username = username;
@@ -77,9 +84,7 @@ public class DynSecPublisher implements MqttCallback {
 	 * @return Retorna a própria classe permitindo o encadeamento de métodos
 	 */
 	public DynSecPublisher removeCommands() {
-		for (int i = 0; i < this.commands.size(); i++) {
-			this.commands.remove(i);
-		}
+		this.commands = new JsonArray();
 		return this;
 	}
 
@@ -159,6 +164,10 @@ public class DynSecPublisher implements MqttCallback {
 
 	public String getTopicToSubscribe() {
 		return topicToSubscribe;
+	}
+	
+	public JsonArray getCommands() {
+		return commands;
 	}
 
 	@Override
